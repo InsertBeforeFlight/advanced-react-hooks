@@ -28,6 +28,8 @@ const PokemonCacheProvider = ({ children }) => {
   )
 }
 
+const usePokemonCacheContext = () => React.useContext(PokemonCacheContext);
+
 function pokemonCacheReducer(state, action) {
   switch (action.type) {
     case 'ADD_POKEMON': {
@@ -40,7 +42,7 @@ function pokemonCacheReducer(state, action) {
 }
 
 function PokemonInfo({pokemonName}) {
-  const [cache, dispatch] = React.useContext(PokemonCacheContext);
+  const [cache, dispatch] = usePokemonCacheContext();
   const {data: pokemon, status, error, run, setData} = useAsync()
 
   React.useEffect(() => {
@@ -70,7 +72,7 @@ function PokemonInfo({pokemonName}) {
 }
 
 function PreviousPokemon({onSelect}) {
-  const [cache] = React.useContext(PokemonCacheContext);
+  const [cache] = usePokemonCacheContext();
   return (
     <div>
       Previous Pokemon
